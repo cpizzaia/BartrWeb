@@ -26,5 +26,18 @@ RSpec.describe Api::UsersController, type: :request do
       expect(json["id"]).not_to be_nil
       expect(json["location"]).not_to be_nil
     end
+
+    it "updates a user" do
+      @user = create(:user)
+      login(@user)
+      @user.location = "test1"
+
+      patch '/api/users/' + @user.id.to_s, user: { location: @user.location }
+
+      json = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(json["location"]).to eq(@user.location)
+    end
   end
 end
