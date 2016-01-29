@@ -14,6 +14,9 @@ gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 group :development do
