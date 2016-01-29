@@ -5,6 +5,13 @@ class User < ActiveRecord::Base
 
   after_initialize :generate_session_token
 
+  has_many(
+    :items,
+    class_name: "Item",
+    foreign_key: :owner_id,
+    primary_key: :id
+  )
+
   attr_reader :password
 
   def self.find_by_credentials(name, password)

@@ -84,4 +84,20 @@ RSpec.describe User, type: :model do
       @user.reset_session_token
     end
   end
+
+  describe "#items" do
+    before(:each) do
+      @user = create(:user)
+      @item = @user.items.create(attributes_for(:item))
+    end
+
+    it "returns the items the user has" do
+      expect(@user.items.first).to eq(@item)
+    end
+
+    it "should have many items" do
+      t = User.reflect_on_association(:items)
+      expect(t.macro).to eq(:has_many)
+    end
+  end
 end
