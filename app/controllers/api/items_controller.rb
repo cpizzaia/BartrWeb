@@ -1,4 +1,4 @@
-class Api::UsersController < ApplicationController
+class Api::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
@@ -17,11 +17,17 @@ class Api::UsersController < ApplicationController
 
   def update
     @item = current_user.items.find(params[:id])
-    if @item.save
+    if @item.update(item_params)
       render :show
     else
       render json: @item.errors.full_messages.to_json, status: 401
     end
+  end
+
+  def destroy
+    current_user.items.find(params[:id]).destroy
+    @item = Item.new
+    render :show
   end
 
   private
