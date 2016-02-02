@@ -13,7 +13,7 @@ RSpec.describe Api::SessionsController, type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(@user.name).to eq(current_user.name)
+      expect(@user.username).to eq(current_user.username)
       expect(json["id"]).to equal(@user.id)
     end
 

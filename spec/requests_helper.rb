@@ -4,7 +4,7 @@ module RequestsHelper
   end
 
   def login(user)
-    post '/api/session', user: { name: user.name, password: user.password }
+    post '/api/session', user: { username: user.username, password: user.password }
   end
 
   def logout
