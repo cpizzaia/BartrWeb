@@ -16,13 +16,13 @@ RSpec.describe Api::UsersController, type: :request do
     it "creates users and logs them in" do
       @user = build(:user)
 
-      post '/api/users', user: { name: @user.name, password: @user.password, location: @user.location }
+      post '/api/users', user: { username: @user.username, password: @user.password, location: @user.location }
 
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(json["name"]).to eq(current_user.name)
-      expect(json["name"]).to eq(@user.name)
+      expect(json["username"]).to eq(current_user.username)
+      expect(json["username"]).to eq(@user.username)
       expect(json["id"]).not_to be_nil
       expect(json["location"]).not_to be_nil
     end
