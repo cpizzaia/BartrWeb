@@ -10,6 +10,14 @@ class Api::SessionsController < ApplicationController
     end
   end
 
+  def show
+    unless current_user
+      render json: {}
+      return
+    end
+    @user = current_user
+    render 'api/user/show'
+  end
 
   def destroy
     session[:session_token] = nil
