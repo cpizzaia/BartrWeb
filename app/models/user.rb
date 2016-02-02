@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  validates :name, :session_token, :password_digest, :session_token, :location, presence: true
-  validates :name, :session_token, uniqueness: true
+  validates :username, :session_token, :password_digest, :session_token, :location, presence: true
+  validates :username, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
   has_attached_file :image, default_url: "missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  def self.find_by_credentials(name, password)
-    user = User.find_by_name(name)
+  def self.find_by_credentials(username, password)
+    user = User.find_by_username(username)
     return nil if user.nil?
     user.is_password?(password) ? user : nil
   end
