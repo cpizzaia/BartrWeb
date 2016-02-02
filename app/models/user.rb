@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   validates :name, :session_token, :password_digest, :session_token, :location, presence: true
   validates :name, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
+  has_attached_file :image, default_url: "missing.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   after_initialize :generate_session_token
 
