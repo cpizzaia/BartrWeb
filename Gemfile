@@ -14,6 +14,7 @@ gem 'bcrypt'
 gem 'paperclip'
 gem 'figaro'
 gem 'aws-sdk'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'byebug'
