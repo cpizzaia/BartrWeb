@@ -6,4 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(username: "bartr", password: "123456", location: "somewhere")
+@user = User.create(username: "bartr", password: "123456", location: "somewhere")
+
+10.times do
+  @user.items.create({
+  name: "An Item",
+  description: "This is the items description.",
+  image: File.new("#{Rails.root}/app/assets/images/item_missing.png")
+  })
+end

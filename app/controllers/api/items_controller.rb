@@ -5,6 +5,11 @@ class Api::ItemsController < ApplicationController
     render :show
   end
 
+  def index
+    @items = Item.all
+    render :index
+  end
+
   def create
     @item = current_user.items.new(item_params)
     if @item.save
