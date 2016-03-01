@@ -2,6 +2,7 @@ class Api::SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(user_params[:username], user_params[:password])
+    byebug
     if @user
       login(@user)
       render :show
@@ -16,13 +17,13 @@ class Api::SessionsController < ApplicationController
       return
     end
     @user = current_user
-    render 'api/user/show'
+    render 'api/users/show'
   end
 
   def destroy
-    session[:session_token] = nil
+    logout(@user)
     @user = User.new
-    render :show
+    render json: {}
   end
 
   private
