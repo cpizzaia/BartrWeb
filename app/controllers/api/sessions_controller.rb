@@ -16,13 +16,13 @@ class Api::SessionsController < ApplicationController
       return
     end
     @user = current_user
-    render 'api/user/show'
+    render 'api/users/show'
   end
 
   def destroy
-    session[:session_token] = nil
+    logout(@user)
     @user = User.new
-    render :show
+    render json: {}
   end
 
   private
