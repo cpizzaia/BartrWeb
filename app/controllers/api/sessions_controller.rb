@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render :show
     else
-      render json: {error: "invalid credentials"}, status: 401
+      render json: {"error": "invalid credentials"}, status: 401
     end
   end
 
@@ -16,13 +16,13 @@ class Api::SessionsController < ApplicationController
       return
     end
     @user = current_user
-    render 'api/user/show'
+    render 'api/users/show'
   end
 
   def destroy
-    session[:session_token] = nil
+    logout(@user)
     @user = User.new
-    render :show
+    render json: {}
   end
 
   private
