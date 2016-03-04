@@ -20,8 +20,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    logout(@user)
-    @user = User.new
+    logout(current_user)
     render json: {}
   end
 
