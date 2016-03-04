@@ -13,7 +13,6 @@ RSpec.describe Api::SessionsController, type: :request do
       json = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(@user.username).to eq(current_user.username)
       expect(json["id"]).to equal(@user.id)
     end
 
@@ -25,6 +24,19 @@ RSpec.describe Api::SessionsController, type: :request do
 
       expect(response).to be_success
       expect(current_user).to be_nil
+    end
+
+    it "returns the current user" do
+      login(@user)
+
+      json = JSON.parse(response.body)
+
+      fetch_current_user(json["session_token"])
+
+      json = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(json["id"]).to eq(@user.id)
     end
   end
 end
