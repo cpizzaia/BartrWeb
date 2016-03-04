@@ -1,7 +1,4 @@
 module RequestsHelper
-  def current_user
-    User.find_by_session_token(session[:session_token])
-  end
 
   def login(user)
     post '/api/session', user: { username: user.username, password: user.password }
@@ -10,6 +7,11 @@ module RequestsHelper
   def logout
     delete '/api/session'
   end
+
+  def fetch_current_user(session_token)
+    get 'api/session', nil, {authorization: session_token}
+  end
+
 end
 
 RSpec.configure do |config|
