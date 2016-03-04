@@ -21,7 +21,7 @@ class Api::SessionsController < ApplicationController
 
   def destroy
     logout
-    render json: {}
+    render json: {'session_token': ''}
   end
 
   private
